@@ -9,5 +9,3 @@ sorted_operations = sort_by_date(filtered_operations, count_last_operation)
 
 for operation in sorted_operations:
     print(get_output_data(operation), end='\n\n')
-
-
