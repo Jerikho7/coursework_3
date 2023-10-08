@@ -3,12 +3,24 @@ import datetime
 
 
 def get_operations(path):
+    """
+    Извлекает списка из файла json.
+    Возвращет список словарей.
+    :param path: путь к файлу.
+    :return: список.
+    """
     with open(path, 'r', encoding='utf-8') as file:
         operations = json.load(file)
     return operations
 
 
 def get_executed_operations(list_operations):
+    """
+    Фильтрует список по ключу 'state' == 'EXECUTED'.
+    Возвращет список словарей с совпадением равенства.
+    :param list_operations: список словарей.
+    :return: отфильтрованный список.
+    """
     executed_operations = []
 
     for operation in list_operations:
@@ -21,12 +33,25 @@ def get_executed_operations(list_operations):
 
 
 def sort_by_date(list_operations, count_operations):
+    """
+    Сортирует список по дате от поздних к ранним.
+    Возвращет список определенного числа словарей с самыми ранними датами.
+    :param count_operations: число словарей, которые надо вернуть.
+    :param list_operations: список словарей.
+    :return: определенное количество отсортированных словарей в списке.
+    """
     sorted_operations = sorted(list_operations, reverse=False, key=lambda operation: operation['date'])
 
     return sorted_operations[-count_operations:]
 
 
 def get_output_data(operation):
+    """
+    Обрабатывает словарь с опирацией.
+    Возвращет строку с читабильными данными.
+    :param operation: словарь.
+    :return: строка.
+    """
     date = datetime.datetime.fromisoformat(operation['date'])
     date_data = date.strftime("%d.%m.%Y")
 
