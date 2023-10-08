@@ -32,7 +32,6 @@ def get_output_data(operation):
 
     description = operation['description']
 
-    from_where = ''
     if operation.get('from') is None:
         from_where = 'Данных нет'
     elif operation['from'].lower().startswith('счет'):
@@ -50,11 +49,9 @@ def get_output_data(operation):
         else:
             from_where = account_list[0] + ' ' + str_slice_private_number
 
-    to_where = ''
     to_account_list = operation['to'].split()
     to_account = '*' * 2 + to_account_list[1][-4:]
     to_where = to_account_list[0] + ' ' + to_account
-
 
     operation_amount = operation['operationAmount']['amount']
     operation_currency_name = operation['operationAmount']["currency"]["name"]
@@ -62,4 +59,3 @@ def get_output_data(operation):
     return f'{date_data} {description}\n' \
            f'{from_where} -> {to_where}\n' \
            f'{operation_amount} {operation_currency_name}\n'
-
